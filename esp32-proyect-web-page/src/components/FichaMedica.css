@@ -1,0 +1,59 @@
+.recuadro{
+    width: 80%;
+    height: auto;
+    border-radius: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    background: linear-gradient(83deg, #4fd5b3, #d7e9ab);
+    background-size: 400% 400%;
+    border: 3px black solid;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
+.fichamedica{
+    font-size: 60px;
+    font-weight:bolder;
+    display: flex;
+    gap: 20px;
+    margin-left: 5%;
+    margin-top: 30px;
+    justify-content: left;
+    
+    
+}
+
+.subfichamedica{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width:850px) {
+    .fichamedica{
+        flex-direction: column;
+        font-size: 30px;
+        margin-left: 0px;
+    }
+}
