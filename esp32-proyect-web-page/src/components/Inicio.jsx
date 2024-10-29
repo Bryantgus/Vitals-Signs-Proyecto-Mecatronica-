@@ -2,28 +2,44 @@ import { useState, useEffect } from "react";
 import FichaMedica from "./fichaMedica";
 import NotePad from "./assets/NotePad_svg";
 import Medicion from "./Medicion";
-import infoPatient from "../infoPatient";
-import signs from "../signs";
 import "./Inicio.css";
-
-const { nombre: nombreUser, edad: edadUser, fechaDeNacimiento: fechaUser, tipoSangre: SangreUser } = infoPatient;
-
 import './App.css';
 
 function Inicio() {
+  const [infoPatient, setInfoPatient] = useState({
+    nombre: "nombre",
+    edad: "edad",
+    sangre: "sangre"
+  });
+
   const [signosVitales, setSignosVitales] = useState({
-    bpm: '0', // Valor inicial
-    o2: '0', // Valor inicial
-    temp: '0' // Valor inicial
+    bpm: '0',
+    o2: '0', 
+    temp: '0' 
   });
 
   useEffect(() => {
+  
+    const fetchInfoPatient = () => {
+      fetch('http://10.0.0.210:3000/infoPatient')
+        .then((response) => response.json())
+        .then((data) => {
+          setInfoPatient({
+            nombre: data.nombre,
+            edad: data.edad,
+            sangre: data.sangre
+          });
+        })
+        .catch((error) => {
+          console.error('Error obteniendo la información del paciente:', error);
+        });
+    };
+
     const fetchSignosVitales = () => {
-      fetch('http://10.0.0.210:3000/')
+      fetch('http://10.0.0.210:3000/signs')
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          // Actualiza el estado con los valores de la respuesta, excluyendo la fecha
           setSignosVitales({
             bpm: data.bmp,
             o2: data.o2,
@@ -31,16 +47,17 @@ function Inicio() {
           });
         })
         .catch((error) => {
-          console.error('Error fetching the signos vitales:', error);
+          console.error('Error obteniendo los signos vitales:', error);
         });
     };
 
-    // Establecer un intervalo que llame a la API cada 2 segundos
+    fetchInfoPatient();
+    fetchSignosVitales();
+
     const intervalId = setInterval(fetchSignosVitales, 1000);
 
-    // Limpiar el intervalo cuando el componente se desmonte
     return () => clearInterval(intervalId);
-  }, []); // [] asegura que solo se ejecute una vez al montar
+  }, []); 
 
   return (
     <div className="main">
@@ -49,10 +66,11 @@ function Inicio() {
         <h1>Signos Vitales</h1>
       </header>
 
-      <FichaMedica nombre={nombreUser} edad={edadUser} sangre={SangreUser} />
+  
+      <FichaMedica nombre={infoPatient.nombre} edad={infoPatient.edad} sangre={infoPatient.sangre} />
       <div className="signosvitales">
         <Medicion descripcion="Pulsaciones por Minuto" img="heartbeat.svg" medida={signosVitales.bpm} />
-        <Medicion descripcion="Oxigeno en la Sangre" img="oxygen.png" medida={signosVitales.o2} />
+        <Medicion descripcion="Oxígeno en la Sangre" img="oxygen.png" medida={signosVitales.o2} />
         <Medicion descripcion="Temperatura Corporal" img="temp.svg" medida={signosVitales.temp} />
       </div>
     </div>

@@ -3,7 +3,7 @@ import cors from "cors";
 import txtManagement from './utilidades/manejoDeArchivoTXT.js';  
 const app = express();
 const port = 3000;
-const host = '192.168.1.62';
+const host = '0.0.0.0';
 
 var data = {
   bpm: 'off',
@@ -11,14 +11,19 @@ var data = {
   temp: 'off',
 }
 
+var infoPatient = {
+  nombre: undefined,
+  edad: undefined,
+  sangre: undefined
+}
+
 
 app.use(cors({
     origin: 'http://localhost:5173' 
 }));
 
-
-app.get('/', (req, res) => {
- 
+//endopoint para obtener los signos
+app.get('/signs', (req, res) => {
  const date = new Date();
  const responseData = {
     bmp: data.bpm,
@@ -26,12 +31,27 @@ app.get('/', (req, res) => {
     temp: data.temp,
     date: date
  }
- 
  res.json(responseData);
-
 });
 
-app.post('/:bpm/:o2/:temp', (req, res) => {
+
+//endpoint para obtener la informacion del paciente
+app.get('/infoPatient', (req,res) => {
+  res.json(infoPatient);
+});
+
+
+//endpoint para cambiar la informacion del paciente
+app.post('/changeInfoPatient/:nombre/:edad/:sangre', (req, res) => {
+  infoPatient = {
+    nombre: req.params.nombre,
+    edad: req.params.edad,
+    sangre: req.params.sangre
+  }
+  res.json(infoPatient);
+});
+//endpoint que usara el esp32 para mandar la informacion a la api
+app.post('/sendsigns/:bpm/:o2/:temp', (req, res) => {
   const date = new Date();
   data.bpm = req.params.bpm;
   data.o2 = req.params.o2;
