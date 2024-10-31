@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página del ESP32</title>
+    <style>
+        body { background: rgb(179,255,196);
+            background: radial-gradient(circle, rgba(179,255,196,1) 26%, rgba(58,245,227,1) 100%); }
+        h1 { color: navy; text-align: center; font-size: 70px;}
+    </style>
+</head>
+<body>
+    <h1>Configuracion de WiFi</h1>
+    <form action="/guardar" method="POST">
+        <label for="ssid">SSID:</label><br>
+        <input type="text" id="ssid" name="ssid"><br>
+        <label for="password">Contraseña:</label><br>
+        <input type="text" id="password" name="password"><br><br>
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>
