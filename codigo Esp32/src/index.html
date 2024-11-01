@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 WiFi Selector</title>
+    <style>
+        body {
+            background: linear-gradient(270deg, #77ecce, #095594);
+            background-size: 400% 400%;
+            animation: backgroundShift 45s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #095594;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 15px;
+            background-color: #095594;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #074477;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vitals Signs</h1>
+    <div class="form-container">
+        <h2>Selecciona la Red WiFi</h2>
+        <form action="/guardar" method="POST">
+            <ul id="wifiList">
+                %WIFILIST%
+            </ul>
+            <input type="password" name="password" placeholder="Introduce la contraseña" required>
+            <input type="submit" value="Guardar Selección">
+        </form>
+    </div>
+</body>
+</html>

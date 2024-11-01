@@ -88,7 +88,7 @@ void escanearRedesWiFi() {
     String listaRedes = "";
     int numRedes = WiFi.scanNetworks();
     for (int i = 0; i < numRedes; i++) {
-        htmlPage += "<li><input type='radio' name='ssid' value='" + WiFi.SSID(i) + "'>" + WiFi.SSID(i) + "</li>";
+        listaRedes += "<li><input type='radio' name='ssid' value='" + WiFi.SSID(i) + "'>" + WiFi.SSID(i) + "</li>";
     }
     Serial.print(listaRedes);
     
@@ -96,18 +96,20 @@ void escanearRedesWiFi() {
 
 void setup() {
     Serial.begin(115200);
-    escanearRedesWiFi();
-    // chequeoDeConexionWifi();
+    // escanearRedesWiFi();
+    delay(1000);
 
-    // if (esperandoConexion < 10) {
-    //     //Conexion exitosa
-    //     //Procede el envio de datos mediando HTTP    
-    //     Serial.println("WiFi connected successfully");
+    chequeoDeConexionWifi();
 
-    // } else if (esperandoConexion > 10) {
-    //     //Conexion fallida e inicia el web server para configurar la red wifi
-    //     configuracionWifi();    
-    //     }
+    if (esperandoConexion < 10) {
+        //Conexion exitosa
+        //Procede el envio de datos mediando HTTP    
+        Serial.println("WiFi connected successfully");
+
+    } else if (esperandoConexion > 10) {
+        //Conexion fallida e inicia el web server para configurar la red wifi
+        configuracionWifi();    
+        }
     
 
 }
