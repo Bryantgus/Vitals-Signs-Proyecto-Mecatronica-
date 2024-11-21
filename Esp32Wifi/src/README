@@ -1,3 +1,0 @@
-El funcionamiento esperado del codigo es el siguiente
-
-1:Al iniciarse si se logra conectar a wifi exitosamente continuara el punto 2, si no el esp32 renderizara una pagina html la cual esta configurada para mostrar las redes wifi disponibles y guardar el nombre y la contraseña de la que se seleccione

@@ -21,7 +21,7 @@ function Inicio() {
   useEffect(() => {
   
     const fetchInfoPatient = () => {
-      fetch('http://10.0.0.210:3000/infoPatient')
+      fetch('https://vitalssingsserver.onrender.com/infoPatient')
         .then((response) => response.json())
         .then((data) => {
           setInfoPatient({
@@ -36,7 +36,7 @@ function Inicio() {
     };
 
     const fetchSignosVitales = () => {
-      fetch('http://10.0.0.210:3000/signs')
+      fetch('https://vitalssingsserver.onrender.com/signs')
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
