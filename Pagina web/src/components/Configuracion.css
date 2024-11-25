@@ -45,6 +45,7 @@
 }
 
 input.small{
+    font-weight: 700;
     width: 90px;
     height: 40px;
     font-size: 50px;
@@ -52,6 +53,7 @@ input.small{
 }
 
 input.normal{
+    font-weight: 700;
     width: 400px;
     height: 40px;
     font-size: 35px;
@@ -67,6 +69,7 @@ input.normal{
 }
 
 .tel > input{
+    font-weight: 700;
     width: 400px;
     height: 40px;
     text-align: center;
@@ -102,7 +105,7 @@ input.normal{
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 50%;
+  width: 100%;
 }
 
 .button-19:after {
@@ -138,3 +141,55 @@ input.normal{
   border-width: 4px 0 0;
   background: none;
 }
+
+
+@media screen and (max-width:850px) {
+
+  .divconfig{
+    width: 300PX;
+    align-items: center;
+  }
+  
+  .infopatientconfig > span{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+  .infopatientconfig{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-columns: auto;
+    gap: 10px 20px;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .infopatientconfig > input{
+    width: 300px;
+    height: 30px;
+    font-size: 100px;
+  }
+
+  input.small{
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  input.normal{
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+
+  }
+
+  .tel > input{
+    width: 300px;
+    font-size: 40px;
+  }
+
+  }

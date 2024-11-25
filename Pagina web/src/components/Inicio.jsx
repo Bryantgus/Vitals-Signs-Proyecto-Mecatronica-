@@ -9,6 +9,8 @@ import './App.css';
 
 function Inicio() {
   const [infoPatient, setInfoPatient] = useState({
+    id: "id",
+    sexo: "sexo",
     nombre: "nombre",
     edad: "edad",
     sangre: "sangre"
@@ -23,23 +25,27 @@ function Inicio() {
   useEffect(() => {
   
     const fetchInfoPatient = () => {
-      fetch('http://localhost:3000/infoPatient')
+      fetch('https://vitalsigns.onrender.com/infoPatient')
         .then((response) => response.json())
         .then((data) => {
-          setInfoPatient({
-            nombre: data.nombre,
-            edad: data.edad,
-            sangre: data.sangre
-          });
-          console.log(infoPatient);
+          if (data.length > 0) {
+            const patient = data[0];  // Extrae el primer objeto del array
+            setInfoPatient({
+              id: patient.id,
+              nombre: patient.nombre,
+              sexo: patient.sexo,
+              edad: patient.edad,
+              sangre: patient.sangre
+            });
+          }
         })
         .catch((error) => {
           console.error('Error obteniendo la información del paciente:', error);
         });
     };
-
+    
     const fetchSignosVitales = () => {
-      fetch('http://localhost:3000/signs')
+      fetch('https://vitalsigns.onrender.com/signs')
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -76,9 +82,9 @@ function Inicio() {
         <Medicion descripcion="Pulsaciones por Minuto" img="heartbeat.svg" medida={signosVitales.bpm} />
         <Medicion descripcion="Oxígeno en la Sangre" img="oxygen.png" medida={signosVitales.o2} />
         <Medicion descripcion="Temperatura Corporal" img="temp.svg" medida={signosVitales.temp} />
-        <Medicion descripcion="na" img="temp.svg" medida={signosVitales.temp} />
-        <Medicion descripcion="na" img="temp.svg" medida={signosVitales.temp} />
-        <Medicion descripcion="na" img="temp.svg" medida={signosVitales.temp} />
+        <Medicion descripcion="Glucosa" img="sangre1.png" medida="off" />
+        <Medicion descripcion="Co2 exalado" img="co2.svg" medida="off" />
+        
       </div>
       </>
   );
