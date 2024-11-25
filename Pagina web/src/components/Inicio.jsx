@@ -5,6 +5,8 @@ import Medicion from "./Medicion";
 import "./Inicio.css";
 import './App.css';
 
+
+
 function Inicio() {
   const [infoPatient, setInfoPatient] = useState({
     nombre: "nombre",
@@ -21,7 +23,7 @@ function Inicio() {
   useEffect(() => {
   
     const fetchInfoPatient = () => {
-      fetch('https://vitalssingsserver.onrender.com/infoPatient')
+      fetch('http://localhost:3000/infoPatient')
         .then((response) => response.json())
         .then((data) => {
           setInfoPatient({
@@ -29,6 +31,7 @@ function Inicio() {
             edad: data.edad,
             sangre: data.sangre
           });
+          console.log(infoPatient);
         })
         .catch((error) => {
           console.error('Error obteniendo la información del paciente:', error);
@@ -36,7 +39,7 @@ function Inicio() {
     };
 
     const fetchSignosVitales = () => {
-      fetch('https://vitalssingsserver.onrender.com/signs')
+      fetch('http://localhost:3000/signs')
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -52,6 +55,7 @@ function Inicio() {
     };
 
     fetchInfoPatient();
+ 
     fetchSignosVitales();
 
     const intervalId = setInterval(fetchSignosVitales, 1000);
@@ -60,7 +64,7 @@ function Inicio() {
   }, []); 
 
   return (
-    <div className="main">
+    <>
       <header>
         <NotePad />
         <h1>Signos Vitales</h1>
@@ -72,8 +76,11 @@ function Inicio() {
         <Medicion descripcion="Pulsaciones por Minuto" img="heartbeat.svg" medida={signosVitales.bpm} />
         <Medicion descripcion="Oxígeno en la Sangre" img="oxygen.png" medida={signosVitales.o2} />
         <Medicion descripcion="Temperatura Corporal" img="temp.svg" medida={signosVitales.temp} />
+        <Medicion descripcion="na" img="temp.svg" medida={signosVitales.temp} />
+        <Medicion descripcion="na" img="temp.svg" medida={signosVitales.temp} />
+        <Medicion descripcion="na" img="temp.svg" medida={signosVitales.temp} />
       </div>
-    </div>
+      </>
   );
 }
 

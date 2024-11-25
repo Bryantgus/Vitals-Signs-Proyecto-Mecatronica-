@@ -1,15 +1,20 @@
 import './App.css'
-import Inicio from "./inicio"
-import InicioSesion from "./InicioSesion"
-
-const login = true;
-
+import Inicio from "./Inicio"
+import Configuracion from './Configuracion';
+import { useState } from 'react';
 
 function App() {
 
+  const[state, setState] = useState(true);
+
+  const alternarComponente = () => {
+    setState(prevState => !prevState);
+  };
+
   return <>
-  {login ? <Inicio /> : <InicioSesion />}
   
+    <button class="config" onClick={alternarComponente}></button>
+    {state ? <Inicio /> : <Configuracion />}
   </>
 
 }
